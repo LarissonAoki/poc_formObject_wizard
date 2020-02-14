@@ -2,7 +2,7 @@ class Worker < ApplicationRecord
     belongs_to :company
     belongs_to :address
 
-    has_on_attached :contract
+    has_one_attached :contract
     has_many_attached :documents
 
     accepts_nested_attributes_for :address
