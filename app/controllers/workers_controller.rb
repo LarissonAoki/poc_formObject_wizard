@@ -14,7 +14,7 @@ class WorkersController < ApplicationController
 
   # GET /workers/new
   def new
-    @worker = Worker.new
+    @worker = Form::WorkerForm.new
   end
 
   # GET /workers/1/edit
@@ -24,16 +24,12 @@ class WorkersController < ApplicationController
   # POST /workers
   # POST /workers.json
   def create
-    @worker = Worker.new(worker_params)
-
-    respond_to do |format|
-      if @worker.save
-        format.html { redirect_to @worker, notice: 'Worker was successfully created.' }
-        format.json { render :show, status: :created, location: @worker }
-      else
-        format.html { render :new }
-        format.json { render json: @worker.errors, status: :unprocessable_entity }
-      end
+    @worker = Form::WorkerForm.new(worker_params)
+    byebug
+    if @worker.save
+      redirect_to worker_path(@worker), notice: 'Worker was successfully created.' 
+    else
+        render :new
     end
   end
 
